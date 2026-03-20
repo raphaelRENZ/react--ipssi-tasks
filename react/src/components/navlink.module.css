@@ -1,17 +1,17 @@
 .link {
-  padding: 10px;
-  background-color: black;
-  color: white;
-  border-radius: 20px;
+  padding: 8px 12px;
+  background-color: #1f2937;
+  color: #f9fafb;
+  border-radius: 999px;
   text-decoration: none;
-  border: 1px solid black;
+  border: 1px solid #374151;
 }
 
 .actual {
-  padding: 10px;
-  background-color: white;
-  color: black;
-  border-radius: 20px;
+  padding: 8px 12px;
+  background-color: #f9fafb;
+  color: #111827;
+  border-radius: 999px;
   text-decoration: none;
-  border: 1px solid black;
+  border: 1px solid #f9fafb;
 }

@@ -20,22 +20,22 @@ final class Version20250107000001 extends AbstractMigration
     public function up(Schema $schema): void
     {
         $this->addSql('
-            CREATE TABLE `user` (
-                id INT AUTO_INCREMENT NOT NULL,
+            CREATE TABLE "user" (
+                id SERIAL NOT NULL,
                 email VARCHAR(180) NOT NULL,
                 roles JSON NOT NULL,
                 password VARCHAR(255) NOT NULL,
                 firstname VARCHAR(100) DEFAULT NULL,
                 lastname VARCHAR(100) DEFAULT NULL,
-                created_at DATETIME NOT NULL,
+                created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
                 PRIMARY KEY(id),
-                UNIQUE INDEX UNIQ_IDENTIFIER_EMAIL (email)
-            ) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB
+                CONSTRAINT uniq_identifier_email UNIQUE (email)
+            )
         ');
     }
 
     public function down(Schema $schema): void
     {
-        $this->addSql('DROP TABLE `user`');
+        $this->addSql('DROP TABLE IF EXISTS "user"');
     }
 }

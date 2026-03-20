@@ -25,21 +25,22 @@ final class Version20250107000000 extends AbstractMigration
      */
     public function up(Schema $schema): void
     {
-        // SQL pour MySQL/MariaDB
+        // SQL compatible PostgreSQL
         $this->addSql('
             CREATE TABLE task (
-                id INT AUTO_INCREMENT NOT NULL,
+                id SERIAL NOT NULL,
                 title VARCHAR(255) NOT NULL,
-                description LONGTEXT DEFAULT NULL,
+                description TEXT DEFAULT NULL,
                 status VARCHAR(20) NOT NULL DEFAULT \'pending\',
-                created_at DATETIME NOT NULL,
-                updated_at DATETIME DEFAULT NULL,
+                created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
+                updated_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL,
                 due_date DATE DEFAULT NULL,
-                PRIMARY KEY(id),
-                INDEX idx_task_status (status),
-                INDEX idx_task_created_at (created_at)
-            ) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB
+                PRIMARY KEY(id)
+            )
         ');
+
+        $this->addSql('CREATE INDEX idx_task_status ON task (status)');
+        $this->addSql('CREATE INDEX idx_task_created_at ON task (created_at)');
 
         // Commentaire pour le jury BTS : Cette requete CREATE TABLE :
         // - Definit une cle primaire auto-incrementee (id)
@@ -52,6 +53,6 @@ final class Version20250107000000 extends AbstractMigration
      */
     public function down(Schema $schema): void
     {
-        $this->addSql('DROP TABLE task');
+        $this->addSql('DROP TABLE IF EXISTS task');
     }
 }

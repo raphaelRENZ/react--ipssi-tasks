@@ -12,7 +12,11 @@ const AuthGard = ({ children }) => {
     }
   }, [jwt, navigate]);
 
-  return { ...children };
+  if (!jwt) {
+    return null;
+  }
+
+  return children;
 };
 
 export default AuthGard;

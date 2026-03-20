@@ -1,12 +1,11 @@
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import styles from "./navlink.module.css";
 
 const NavLink = ({ path, children }) => {
+  const location = useLocation();
+
   return (
-    <Link
-      className={location.pathname === path ? styles.actual : styles.link}
-      to={path}
-    >
+    <Link className={location.pathname === path ? styles.actual : styles.link} to={path}>
       {children}
     </Link>
   );
